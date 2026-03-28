@@ -3,10 +3,10 @@ let alumnes = [];
 //funcion 1: validar formilario
 function validarFormulari() {
     let nom = document.getElementById("nom").value;
-    let examen = document.getElementById("examen").value;
-    let practiques = document.getElementById("practiques").value;
-    let actitud = document.getElementById("actitud").value; 
-}
+    let examen = parseFloat(document.getElementById("examen").value);
+    let practiques = parseFloat(document.getElementById("practiques").value);
+    let actitud = parseFloat(document.getElementById("actitud").value);
+//parseFloat convierte el valor a un número decimal, en vez de un string.
 // Comprobar nombre
     if (nom === '') {
         alert('El nom no pot estar buit');
@@ -29,6 +29,7 @@ function validarFormulari() {
     }
 
     return true;
+}
 //funcion 2: calcular media
 function calcularMedia() {
     let nota1 = parseFloat(document.getElementById("examen").value);
@@ -37,17 +38,27 @@ function calcularMedia() {
     let notamedia = (nota1 * 0.6 + nota2 * 0.3 + nota3 * 0.1);
     return notamedia.toFixed(2);
 }
-function afegirAlumne() {
+// Función 3: Añadir alumno
+function añadirAlumno() {       
     let nom = document.getElementById("nom").value;
+    let examen = parseFloat(document.getElementById("examen").value);
+    let practiques = parseFloat(document.getElementById("practiques").value);
+    let actitud = parseFloat(document.getElementById("actitud").value);
     let mitjana = calcularMedia();
-    alumnes.push({ nom: nom, mitjana: mitjana });
+    
+    // Creamos el objeto alumno con los valores obtenidos
+    let alumne = {
+        nom: nom,
+        examen: examen,
+        practiques: practiques,
+        actitud: actitud,
+        mitjana: parseFloat(mitjana)
+    };
+    
+    alumnes.push(alumne);
     mostrarAlumnes();
+
+    // Limpiar formulario
+    document.getElementById("formulariAlumne").reset();
+    alert('Alumne afegit!');
 }
-function mostrarAlumnes() {
-    let taula = document.getElementById("taulaAlumnes");
-    taula.innerHTML = "<tr><th>Nom</th><th>Mitjana</th></tr>";
-    alumnes.forEach(alumne => {
-        let fila = `<tr><td>${alumne.nom}</td><td>${alumne.mitjana.toFixed(2)}</td></tr>`;
-        taula.innerHTML += fila;
-    });
-}           
