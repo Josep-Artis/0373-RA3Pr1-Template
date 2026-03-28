@@ -45,7 +45,6 @@ function añadirAlumno() {
     let practiques = parseFloat(document.getElementById("practiques").value);
     let actitud = parseFloat(document.getElementById("actitud").value);
     let mitjana = calcularMedia();
-    
     // Creamos el objeto alumno con los valores obtenidos
     let alumne = {
         nom: nom,
@@ -54,11 +53,35 @@ function añadirAlumno() {
         actitud: actitud,
         mitjana: parseFloat(mitjana)
     };
-    
     alumnes.push(alumne);
     mostrarAlumnes();
-
     // Limpiar formulario
     document.getElementById("formulariAlumne").reset();
     alert('Alumne afegit!');
+}
+// Función 4: Mostrar alumnos en la tabla
+function mostrarAlumnes() {
+    let tbody = document.getElementById("cosTaula");
+    tbody.innerHTML = "";
+    
+    for (let i = 0; i < alumnes.length; i++) {
+        let alumne = alumnes[i];
+        // Decidir si aprobado o suspendido
+        let estat = '';
+        if (alumne.mitjana >= 5) {
+            estat = 'Aprovat';
+        } else {
+            estat = 'Suspès';
+        }
+        // Crear fila
+        let fila = '<tr>';
+        fila += '<td>' + alumne.nom + '</td>';
+        fila += '<td>' + alumne.examen.toFixed(2) + '</td>';
+        fila += '<td>' + alumne.practiques.toFixed(2) + '</td>';
+        fila += '<td>' + alumne.actitud.toFixed(2) + '</td>';
+        fila += '<td>' + alumne.mitjana.toFixed(2) + '</td>';
+        fila += '<td>' + estat + '</td>';
+        fila += '</tr>';
+        tbody.innerHTML += fila;
+    }
 }
