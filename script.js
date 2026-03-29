@@ -85,3 +85,29 @@ function mostrarAlumnes() {
         tbody.innerHTML += fila;
     }
 }
+// Función 5: Ordenar alumnos
+function ordenarAlumnes(ordre) {
+    if (ordre === 'asc') {
+        alumnes.sort(function(a, b) {
+            return a.mitjana - b.mitjana;
+        });
+    } else {
+        alumnes.sort(function(a, b) {
+            return b.mitjana - a.mitjana;
+        });
+    }
+    mostrarAlumnes();
+}
+// ===== EVENT LISTENERS =====
+document.getElementById('formulariAlumne').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (validarFormulari()) {
+        añadirAlumno();
+    }
+});
+document.getElementById('ordenarAsc').addEventListener('click', function() {
+    ordenarAlumnes('asc');
+});
+document.getElementById('ordenarDesc').addEventListener('click', function() {
+    ordenarAlumnes('desc');
+});
