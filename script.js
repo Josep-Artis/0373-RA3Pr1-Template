@@ -98,7 +98,6 @@ function ordenarAlumnes(ordre) {
     }
     mostrarAlumnes();
 }
-// ===== EVENT LISTENERS =====
 document.getElementById('formulariAlumne').addEventListener('submit', function(e) {
     e.preventDefault();
     if (validarFormulari()) {
@@ -111,3 +110,16 @@ document.getElementById('ordenarAsc').addEventListener('click', function() {
 document.getElementById('ordenarDesc').addEventListener('click', function() {
     ordenarAlumnes('desc');
 });
+
+//EVENT LISTENERS <-- importante los get elements sino no funciona nada xD
+document.getElementById('formulariAlumne').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (validarFormulari()) {
+        añadirAlumno();
+    }
+});
+document.getElementById('ordenarAsc').addEventListener('click', function() {
+    ordenarAlumnes('asc');
+});
+document.getElementById('ordenarDesc').addEventListener('click', function() {
+    ordenarAlumnes('desc');
